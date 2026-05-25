@@ -1,159 +1,270 @@
-# Astro Sienna
+# olek.dev
 
-A minimal Astro blog template with serif typography, dark mode, RSS, OG images, and optional Giscus comments and
-analytics.
+Personal blog built with [Astro](https://astro.build) using the [astro-sienna](https://github.com/AnjayGoel/astro-sienna) theme.
 
-**Live demo:** [Github Pages](https://anjaygoel.github.io/astro-sienna)
+## Prerequisites
 
-![Astro Sienna home page in dark and light themes](.github/assets/preview.png)
+- [Node.js](https://nodejs.org) (v18 or later)
+- [pnpm](https://pnpm.io) — install with `npm install -g pnpm`
 
-## Features
-
-- Astro 6 with content collections (posts and pages, both validated by Zod)
-- MDX support — embed Astro/JSX components, imports, and JS expressions inside posts
-- Light and dark mode with a CSS-only theme toggle
-- Self-hosted serif body font ([Newsreader](https://github.com/productiontype/Newsreader)) and mono (JetBrains Mono)
-- Code blocks via [astro-expressive-code](https://expressive-code.com): themes, copy button, terminal frames, line
-  highlighting
-- Math via KaTeX (`$inline$` and `$$display$$`)
-- Custom containers (`:::note`, `:::tip`, `:::caution`)
-- Per-post OG images generated at build time (Satori + resvg)
-- RSS feed, sitemap, robots.txt, web manifest
-- Optional [Giscus](https://giscus.app) comments with custom matched themes
-- Optional GA4 and Goatcounter analytics, both loaded via [Partytown](https://partytown.qwik.dev/) so they run on a
-  worker thread
-- Optional [webmentions](https://webmention.io), fetched at build and cached locally
-- Perfect Lighthouse scores (Performance, Accessibility, Best Practices, SEO)
-
-## Quick start
-
-Click **Use this template** on GitHub, or clone directly:
+## Running the site
 
 ```sh
-git clone https://github.com/AnjayGoel/astro-sienna.git my-site
-cd my-site
-pnpm install
+# Start the dev server (live-reloads on every save)
 pnpm dev
 ```
 
-Open http://localhost:4321.
+Open http://localhost:4321 in your browser. Stop the server with `Ctrl+C`.
 
-## Commands
+```sh
+# Build the production version
+pnpm build
 
-| Command        | What it does                                 |
-|----------------|----------------------------------------------|
-| `pnpm dev`     | Start the dev server with HMR                |
-| `pnpm build`   | Type-check, build, and run Pagefind indexing |
-| `pnpm preview` | Preview the production build locally         |
-| `pnpm format`  | Run Biome and Prettier                       |
-| `pnpm lint`    | Lint with Biome                              |
+# Preview the production build locally
+pnpm preview
+```
 
-## Configuration
+## Adding a new blog post
 
-Most personalisation happens in two files.
+Create a new `.md` file in `src/content/post/`. The filename becomes the URL slug, so `my-new-post.md` will be available at `/posts/my-new-post/`.
 
-**`src/site.config.ts`** holds author, profile, comments, analytics, and webmentions. Every field in `profile` is
-optional. Leave any of `email`, `github`, `linkedin`, `employer`, `alumni`, or `avatar` undefined and the corresponding
-link is hidden site-wide. Same for `comments` and `analytics`: undefined means the script never loads.
+Every post **must** start with a frontmatter block between `---` fences:
 
-**`astro.config.ts`** is where you set `site` to your final domain (used for canonical URLs, sitemap, RSS, and OG image
-URLs). The base path is handled automatically — see [Deploying](#deploying); you normally don't touch it.
+```markdown
+---
+title: "My Post Title"
+publishDate: 2026-05-25
+description: "A short summary (10-160 characters). Shown in post cards and social previews."
+tags: [kotlin, android]
+---
 
-Replace these assets in `public/`:
+Your post content starts here. Write normal Markdown.
+```
 
-- `icon.png` (512×512). Drives the favicon and the auto-generated `apple-touch-icon`, `icon-192`, and `icon-512` PWA
-  manifest icons.
-- `social-card.png` (1200×630). Fallback OG image, used when a post doesn't have its own. The default is a placeholder
-  you can swap.
-- `avatar.png` (optional). Referenced from `siteConfig.profile.avatar`, used in the About page's structured data and any
-  avatar slot you add.
+### Frontmatter fields
 
-### Per-post OG images
+| Field         | Required | Description                                               |
+|---------------|----------|-----------------------------------------------------------|
+| `title`       | yes      | Post title (max 120 characters)                           |
+| `publishDate` | yes      | Date in `YYYY-MM-DD` format                               |
+| `description` | yes      | Short summary, 10-160 characters                          |
+| `tags`        | no       | List of tags, e.g. `[kotlin, android]`                    |
+| `draft`       | no       | Set to `true` to hide the post from the production build  |
+| `updatedDate` | no       | `YYYY-MM-DD` — shown as "Updated …" on the post page     |
+| `coverImage`  | no       | Object with `src` (image path) and `alt` (description)    |
+| `ogImage`     | no       | Custom social preview image path (auto-generated if omitted) |
 
-Every post gets its own 1200×630 OG image generated at build time by [Satori](https://github.com/vercel/satori). The
-markup lives in `src/pages/og-image/[...slug].png.ts`. Tweak it once and every post's card updates on the next build. To
-skip the generated image and point a post at your own, set `ogImage: "/path/to/image.png"` in the post's frontmatter.
+### Markdown cheat sheet
 
-## Writing posts
+```markdown
+## Heading 2
+### Heading 3
 
-Posts live in `src/content/post/` as `.md` or `.mdx` files. The filename becomes the slug.
+**bold** and *italic*
+
+[Link text](https://example.com)
+
+![Alt text](./image.png)
+
+- Bullet list
+- Another item
+
+1. Numbered list
+2. Second item
+
+> Blockquote
+
+`inline code`
+
+​```kotlin
+// Code block with syntax highlighting
+fun main() {
+    println("Hello")
+}
+​```
+
+Inline math: $E = mc^2$
+
+Display math:
+$$
+\int_{0}^{1} x^2 dx = \frac{1}{3}
+$$
+```
+
+You can also use `.mdx` files if you need to embed interactive components — but plain `.md` is enough for most posts.
+
+## Adding images, videos, and other files
+
+There are two places to put files, depending on whether you want Astro to optimize them.
+
+### Option 1: Co-located with the post (recommended for images)
+
+Create a `_assets` folder next to your post and reference files with a relative path:
+
+```
+src/content/post/
+  my-post.md
+  _assets/
+    screenshot.png
+    diagram.jpg
+```
+
+In your Markdown:
+
+```markdown
+![Screenshot of the app](./_assets/screenshot.png)
+```
+
+Astro will **automatically optimize** these images (resize, compress, convert to modern formats). This is the best option for photos and screenshots.
+
+You can also use this approach for the `coverImage` frontmatter field:
 
 ```yaml
 ---
-title: "Your post title"
-publishDate: 2026-01-12
-description: "One-sentence summary used in cards, social previews, and meta tags."
-tags: [ tag-one, tag-two ]
-# updatedDate: 2026-02-01     # optional, shown as "Updated …"
-# draft: true                  # excludes the post from production builds
-# coverImage:
-#   src: ./_assets/cover.png
-#   alt: "Description for screen readers"
+coverImage:
+  src: ./_assets/cover.png
+  alt: "Cover image description"
 ---
 ```
 
-The about page is also markdown, at `src/content/page/about.md`. Showcase entries are typed objects in
-`src/data/showcase.ts`; empty the array and the Showcase tab is hidden automatically.
+### Option 2: The `public/` folder (for videos, audio, PDFs, and direct links)
 
-## Project layout
+Files in `public/` are served as-is at the site root, with no processing. Use this for files that Astro can't or shouldn't optimize:
+
+```
+public/
+  files/
+    demo.mp4
+    podcast.mp3
+    resume.pdf
+```
+
+Reference them with an absolute path from the site root:
+
+```markdown
+[Download my resume](/files/resume.pdf)
+```
+
+For **videos** and **audio**, use HTML tags directly in your Markdown:
+
+```markdown
+<video src="/files/demo.mp4" controls width="100%"></video>
+
+<audio src="/files/podcast.mp3" controls></audio>
+```
+
+Or embed from external services (YouTube, Vimeo, etc.):
+
+```markdown
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+```
+
+### Which option to use?
+
+| File type       | Where to put it                  | Why                                    |
+|-----------------|----------------------------------|----------------------------------------|
+| Post images     | `src/content/post/_assets/`      | Astro optimizes them automatically     |
+| Videos          | `public/files/`                  | Too large for build-time processing    |
+| Audio           | `public/files/`                  | Not supported by Astro image optimizer |
+| PDFs, downloads | `public/files/`                  | Served as-is, no processing needed     |
+| Site-wide images (logo, favicon) | `public/`       | Already there, used globally           |
+
+## Creating standalone pages
+
+Standalone pages (terms of use, privacy policy, etc.) are `.astro` files in `src/pages/`. Each file becomes a route automatically:
+
+1. Create a file like `src/pages/terms.astro`
+2. Use this template:
+
+```astro
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+  title: "Terms of Use",
+  description: "Terms and conditions for using this website.",
+};
+---
+
+<PageLayout meta={meta}>
+  <section>
+    <div class="section-label">Terms of Use</div>
+    <div class="prose">
+      <p>Your terms content here. Write normal HTML.</p>
+      <h2>Section heading</h2>
+      <p>More content...</p>
+    </div>
+  </section>
+</PageLayout>
+```
+
+The page will be available at `/terms/`. No need to register it anywhere — Astro picks it up automatically.
+
+To add the page to the **navigation menu**, edit `src/site.config.ts`:
+
+```ts
+export const menuLinks: { path: string; title: string }[] = [
+  { path: "/", title: "Home" },
+  { path: "/posts/", title: "Posts" },
+  { path: "/about/", title: "About" },
+  { path: "/terms/", title: "Terms" },  // <-- add this
+];
+```
+
+## Project structure
 
 ```
 src/
-  site.config.ts        # author / profile / integrations
-  content.config.ts     # collection schemas (post, page)
+  site.config.ts          ← Your name, bio, social links, site settings
   content/
-    post/*.md           # blog posts
-    page/about.md       # about page
-  data/showcase.ts      # showcase entries (or empty for none)
-  components/           # blog/, layout/, ui/
-  layouts/              # Base.astro, BlogPost.astro
-  pages/                # routes (incl. /og-image, /posts pagination, rss)
-  plugins/              # remark-admonitions, remark-reading-time
-  styles/global.css     # design tokens and shared utilities
-public/                 # static assets served at site root
+    post/*.md             ← Blog posts (this is where you write)
+    page/about.md         ← About page content
+  data/showcase.ts        ← Showcase/portfolio entries
+  pages/                  ← Routes (each .astro file = a page)
+  layouts/                ← Page templates
+  components/             ← Reusable UI pieces
+  styles/global.css       ← Colors, fonts, design tokens
+public/
+  icon.png                ← Site favicon (512x512)
+  social-card.png         ← Default social preview image (1200x630)
+  avatar.png              ← Your photo (optional)
 ```
 
-## Theming
+## Common tasks
 
-Design tokens are CSS variables at the top of `src/styles/global.css`: accent colour, hairlines, surfaces, fonts. The
-light and dark variants are gated by `[data-theme="light"]` and `[data-theme="dark"]` on the `<html>` element, so
-swapping them is a single re-render with no script.
+### Change site info or social links
 
-Code-block themes are configured separately in `expressiveCodeOptions` in `site.config.ts` (defaults: `min-light` and
-`min-dark`).
+Edit `src/site.config.ts` — your name, email, GitHub, LinkedIn, employer, etc. are all there.
+
+### Change the About page
+
+Edit `src/content/page/about.md`. It's plain Markdown.
+
+### Replace site images
+
+Drop your files into `public/`:
+- `icon.png` (512x512) — favicon and PWA icon
+- `social-card.png` (1200x630) — default image shown when sharing links on social media
+- `avatar.png` — your photo
+
+### Change colors or fonts
+
+Edit `src/styles/global.css`. Light and dark theme colors are at the top of the file under `[data-theme="light"]` and `[data-theme="dark"]`.
+
+### Hide the showcase section
+
+The showcase section is already empty. If you want to add projects to it later, edit `src/data/showcase.ts`.
 
 ## Deploying
 
-Output is a static `dist/` directory that deploys anywhere serving files: Cloudflare Pages, Netlify, Vercel, GitHub
-Pages, S3 + CloudFront. Build command: `pnpm build`. Output directory: `dist`.
+`pnpm build` produces a static `dist/` folder. Upload it to any static host: Netlify, Vercel, Cloudflare Pages, GitHub Pages, or a simple file server.
 
-### Base path
+## Theme updates
 
-Defaults to root (`/`) — no config needed for local dev, Netlify, Vercel, Cloudflare Pages, a custom domain, or a
-GitHub Pages **user** site. The whole site (links, assets, feeds, OG/canonical, manifest, Markdown links) is base-aware.
-
-For a GitHub Pages **project** site (served from `/repo/`), the bundled `.github/workflows/deploy.yml` detects the
-subpath and configures it automatically; the only manual step is **Settings → Pages → Source: GitHub Actions**. For a
-subpath on any other host, build with `BASE_PATH=/sub pnpm build`.
-
-## Pulling theme updates
-
-To keep tracking upstream changes after you've forked, add this repo as a second remote:
+To pull improvements from the upstream theme:
 
 ```sh
 git remote add theme https://github.com/AnjayGoel/astro-sienna.git
 git fetch theme
 git merge theme/main --allow-unrelated-histories
 ```
-
-Use `.gitattributes` with a `merge=ours` driver on personal-content paths (e.g. `src/content/post/*`,
-`src/site.config.ts`, `public/avatar.png`) to keep your changes through the merge.
-
-## Credits
-
-Originally forked from [astro-theme-cactus](https://github.com/chrismwilliams/astro-theme-cactus)
-by [Chris Williams](https://github.com/chrismwilliams), then heavily revamped into its current form.
-
-## License
-
-[MIT](./LICENSE).

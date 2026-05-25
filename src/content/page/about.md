@@ -1,14 +1,20 @@
 ---
 title: About
-description: A short introduction. Replace this in src/content/page/about.md.
+description: About Oleksandr Katrych — mobile developer with 7+ years of experience in Android development.
 ---
 
-This is the About page. It's a markdown file at `src/content/page/about.md` — edit it freely. The shape is intentionally unstructured so you can write a paragraph, a list, a CV, or whatever fits.
+Hi, I'm Oleksandr Katrych — a software engineer with over 7 years of professional experience, primarily focused on mobile application development.
 
-A few example bullets to get going:
+I currently work at [Nord Security](https://nordsecurity.com) as a Mobile Developer, specializing in Android development and Kotlin. I studied at the [Polish-Japanese Academy of Information Technology](https://www.pja.edu.pl/) and I'm based in Warsaw.
 
-- 👋 One-line intro — what you do, where, since when.
-- 🛠 The tools you reach for first.
-- 📝 What you tend to write about here.
+## What I do
 
-Find me on [GitHub](https://github.com/example), [LinkedIn](https://www.linkedin.com/in/example/), or by [email](mailto:john@example.com).
+- Building mobile applications with a focus on Android and Kotlin
+- Exploring Compose Multiplatform for cross-platform development
+- Contributing to open-source projects
+
+## Find me online
+
+- [GitHub](https://github.com/OKatrych)
+- [LinkedIn](https://www.linkedin.com/in/okatrych/)
+- [X (Twitter)](https://x.com/okatrych)

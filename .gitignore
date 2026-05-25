@@ -14,14 +14,19 @@ pnpm-debug.log*
 
 # environment variables
 .env
-.env.production
+.env.*
 
 # macOS-specific files
 .DS_Store
+
+# editor directories
+.idea/
+.vscode/
+*.swp
+*.swo
 
 # misc
 *.pem
 .cache
 .astro
-.idea
 temp/
