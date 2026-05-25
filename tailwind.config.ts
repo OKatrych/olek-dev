@@ -30,8 +30,8 @@ export default {
 				textMuted: "hsl(var(--theme-text-muted) / <alpha-value>)",
 			},
 			fontFamily: {
-				sans: ["Inter", ...fontFamily.sans],
-				serif: [...fontFamily.serif],
+				sans: ["IBM Plex Sans Variable", ...fontFamily.sans],
+				serif: ["IBM Plex Sans Variable", ...fontFamily.sans],
 			},
 			transitionProperty: {
 				height: "height",

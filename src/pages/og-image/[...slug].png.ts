@@ -1,7 +1,7 @@
-import JetBrainsMono from "@/assets/fonts/jetbrainsmono-regular.ttf";
-import NewsreaderItalic from "@/assets/fonts/newsreader-italic.ttf";
-import NewsreaderRegular from "@/assets/fonts/newsreader-regular.ttf";
-import NewsreaderSemiBold from "@/assets/fonts/newsreader-semibold.ttf";
+import IBMPlexSansItalic from "@/assets/fonts/ibm-plex-sans-italic.ttf";
+import IBMPlexSansRegular from "@/assets/fonts/ibm-plex-sans-regular.ttf";
+import IBMPlexSansSemiBold from "@/assets/fonts/ibm-plex-sans-semibold.ttf";
+import LilexRegular from "@/assets/fonts/lilex-regular.ttf";
 import { getAllPosts } from "@/data/post";
 import { siteConfig } from "@/site-config";
 import { formatBylineDate, formatEyebrowDate } from "@/utils/date";
@@ -13,10 +13,10 @@ import { html } from "satori-html";
 
 const ogOptions: SatoriOptions = {
 	fonts: [
-		{ data: Buffer.from(NewsreaderRegular), name: "Newsreader", style: "normal", weight: 400 },
-		{ data: Buffer.from(NewsreaderSemiBold), name: "Newsreader", style: "normal", weight: 600 },
-		{ data: Buffer.from(NewsreaderItalic), name: "Newsreader", style: "italic", weight: 400 },
-		{ data: Buffer.from(JetBrainsMono), name: "JetBrains Mono", style: "normal", weight: 400 },
+		{ data: Buffer.from(IBMPlexSansRegular), name: "IBM Plex Sans", style: "normal", weight: 400 },
+		{ data: Buffer.from(IBMPlexSansSemiBold), name: "IBM Plex Sans", style: "normal", weight: 600 },
+		{ data: Buffer.from(IBMPlexSansItalic), name: "IBM Plex Sans", style: "italic", weight: 400 },
+		{ data: Buffer.from(LilexRegular), name: "Lilex", style: "normal", weight: 400 },
 	],
 	height: 630,
 	width: 1200,
@@ -38,22 +38,22 @@ const markup = (props: {
 	tagsLine: string;
 	host: string;
 }) =>
-	html`<div tw="flex flex-col w-full h-full px-20 py-16" style="background-color: #1a1715; font-family: Newsreader;">
-		<p tw="text-2xl mb-10 tracking-widest uppercase" style="font-family: JetBrains Mono; color: #c89761;">
+	html`<div tw="flex flex-col w-full h-full px-20 py-16" style="background-color: #1a1715; font-family: IBM Plex Sans;">
+		<p tw="text-2xl mb-10 tracking-widest uppercase" style="font-family: Lilex; color: #c89761;">
 			${props.eyebrow}
 		</p>
 		<h1 tw="${titleClass(props.title)}" style="color: #fbf6ec; font-weight: 600;">
 			${props.title}
 		</h1>
-		<p tw="text-2xl mb-4" style="font-family: JetBrains Mono; color: #a89c8a;">
+		<p tw="text-2xl mb-4" style="font-family: Lilex; color: #a89c8a;">
 			${props.byline}
 		</p>
-		<p tw="text-xl tracking-wider uppercase" style="font-family: JetBrains Mono; color: #c89761;">
+		<p tw="text-xl tracking-wider uppercase" style="font-family: Lilex; color: #c89761;">
 			${props.tagsLine}
 		</p>
 		<div tw="flex flex-1"></div>
 		<div tw="flex justify-end w-full">
-			<p tw="text-lg tracking-wide" style="font-family: JetBrains Mono; color: #6b5e4f;">
+			<p tw="text-lg tracking-wide" style="font-family: Lilex; color: #6b5e4f;">
 				${props.host}
 			</p>
 		</div>

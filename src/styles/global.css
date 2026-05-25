@@ -1,8 +1,7 @@
 /* `@import` must precede all other rules. */
-@import "@fontsource-variable/newsreader/wght.css";
-@import "@fontsource-variable/newsreader/wght-italic.css";
-@import "@fontsource-variable/inter/wght.css";
-@import "@fontsource-variable/jetbrains-mono/wght.css";
+@import "@fontsource-variable/ibm-plex-sans/wght.css";
+@import "@fontsource-variable/ibm-plex-sans/wght-italic.css";
+@import "@fontsource-variable/lilex/wght.css";
 @import "katex/dist/katex.min.css";
 
 @tailwind base;
@@ -24,9 +23,9 @@
 
 @layer base {
 	:root {
-		--font-serif: "Newsreader Variable", "Iowan Old Style", Georgia, serif;
-		--font-sans: "Inter Variable", -apple-system, system-ui, sans-serif;
-		--font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, monospace;
+		--font-serif: "IBM Plex Sans Variable", -apple-system, system-ui, sans-serif;
+		--font-sans: "IBM Plex Sans Variable", -apple-system, system-ui, sans-serif;
+		--font-mono: "Lilex Variable", ui-monospace, SFMono-Regular, monospace;
 
 		/* Layout tokens — shared across home, posts archive, and article pages */
 		--reading-width: 64ch;          /* article body & long prose blocks */
