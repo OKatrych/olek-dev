@@ -1,0 +1,98 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "Privacy Policy for P2P Binance Widget Android application.",
+	title: "P2P Binance Widget — Privacy Policy",
+};
+
+const lastUpdated = "May 26, 2026";
+---
+
+<PageLayout meta={meta}>
+	<section class="legal" aria-labelledby="legal-label">
+		<div class="section-label" id="legal-label">Privacy Policy</div>
+		<h1>P2P Binance Widget — Privacy Policy</h1>
+		<p class="updated">Last updated: {lastUpdated}</p>
+
+		<h2>Introduction</h2>
+		<p>
+			Oleksandr Katrych ("we", "us", or "our") operates the P2P Binance Widget mobile application
+			(the "App"). This Privacy Policy explains how we collect, use, and protect your information
+			when you use our App.
+		</p>
+
+		<h2>Information We Collect</h2>
+		<p>
+			P2P Binance Widget does <strong>not</strong> collect, store, or transmit any personal data.
+			The App does not require user registration or login.
+		</p>
+
+		<h2>Third-Party Services</h2>
+		<p>
+			The App connects to Binance's publicly available API to retrieve peer-to-peer market data. We
+			do not control and are not responsible for the privacy practices of Binance or any other
+			third-party services. No personal information is shared with these services.
+		</p>
+
+		<h2>Data Storage</h2>
+		<p>
+			All user preferences, widget configurations, and cached data are stored locally on your
+			device. We do not have access to this data.
+		</p>
+
+		<h2>Children's Privacy</h2>
+		<p>
+			The App is not directed at children under the age of 13. We do not knowingly collect personal
+			information from children.
+		</p>
+
+		<h2>Changes to This Policy</h2>
+		<p>
+			We may update this Privacy Policy from time to time. Any changes will be reflected on this
+			page with an updated revision date.
+		</p>
+
+		<h2>Contact Us</h2>
+		<p>
+			If you have any questions about this Privacy Policy, please contact us at
+			<a href="mailto:o.katrycz@gmail.com">o.katrycz@gmail.com</a>.
+		</p>
+	</section>
+</PageLayout>
+
+<style>
+	.legal {
+		margin-bottom: 64px;
+		max-width: var(--reading-width);
+	}
+	.legal h1 {
+		font-size: 1.6rem;
+		margin: 0 0 8px;
+	}
+	.legal .updated {
+		font-size: 0.9rem;
+		color: hsl(var(--theme-text) / 0.6);
+		margin: 0 0 32px;
+	}
+	.legal h2 {
+		font-size: 1.15rem;
+		margin: 28px 0 8px;
+	}
+	.legal p {
+		margin: 0 0 16px;
+		text-wrap: pretty;
+	}
+	.legal a {
+		color: hsl(var(--theme-text));
+		text-decoration: underline;
+		text-decoration-color: hsl(var(--theme-text) / 0.35);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 3px;
+		transition: color 0.2s ease, text-decoration-color 0.2s ease;
+	}
+	.legal a:hover {
+		color: hsl(var(--theme-accent));
+		text-decoration-color: hsl(var(--theme-accent));
+	}
+</style>

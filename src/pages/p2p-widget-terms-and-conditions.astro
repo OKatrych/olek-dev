@@ -1,0 +1,112 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "Terms and Conditions for P2P Widget Android application.",
+	title: "P2P Widget — Terms and Conditions",
+};
+
+const lastUpdated = "May 26, 2026";
+---
+
+<PageLayout meta={meta}>
+	<section class="legal" aria-labelledby="legal-label">
+		<div class="section-label" id="legal-label">Terms and Conditions</div>
+		<h1>P2P Widget — Terms and Conditions</h1>
+		<p class="updated">Last updated: {lastUpdated}</p>
+
+		<h2>Acceptance of Terms</h2>
+		<p>
+			By downloading, installing, or using the P2P Widget application (the "App"), you agree to be
+			bound by these Terms and Conditions. If you do not agree, please do not use the App.
+		</p>
+
+		<h2>Description of Service</h2>
+		<p>
+			P2P Widget provides a home screen widget that displays publicly available peer-to-peer market
+			data. The App is provided for informational purposes only and does not constitute financial
+			advice.
+		</p>
+
+		<h2>Disclaimer</h2>
+		<p>
+			The App is provided "as is" without warranties of any kind, either express or implied. We do
+			not guarantee the accuracy, completeness, or timeliness of the data displayed. You
+			acknowledge that market data may be delayed or inaccurate.
+		</p>
+
+		<h2>Limitation of Liability</h2>
+		<p>
+			To the fullest extent permitted by law, Oleksandr Katrych shall not be liable for any
+			indirect, incidental, special, consequential, or punitive damages arising from your use of
+			the App. We are not responsible for any financial decisions made based on information provided
+			by the App.
+		</p>
+
+		<h2>Intellectual Property</h2>
+		<p>
+			All content, design, and code of the App are the property of Oleksandr Katrych and are
+			protected by applicable intellectual property laws.
+		</p>
+
+		<h2>Third-Party Services</h2>
+		<p>
+			The App may rely on third-party APIs and services to provide market data. We are not
+			responsible for the availability or accuracy of these external services.
+		</p>
+
+		<h2>Modifications</h2>
+		<p>
+			We reserve the right to modify or discontinue the App at any time without prior notice. We
+			may also update these Terms and Conditions, and continued use of the App constitutes
+			acceptance of any changes.
+		</p>
+
+		<h2>Governing Law</h2>
+		<p>
+			These Terms and Conditions are governed by and construed in accordance with applicable laws.
+		</p>
+
+		<h2>Contact Us</h2>
+		<p>
+			If you have any questions about these Terms and Conditions, please contact us at
+			<a href="mailto:o.katrycz@gmail.com">o.katrycz@gmail.com</a>.
+		</p>
+	</section>
+</PageLayout>
+
+<style>
+	.legal {
+		margin-bottom: 64px;
+		max-width: var(--reading-width);
+	}
+	.legal h1 {
+		font-size: 1.6rem;
+		margin: 0 0 8px;
+	}
+	.legal .updated {
+		font-size: 0.9rem;
+		color: hsl(var(--theme-text) / 0.6);
+		margin: 0 0 32px;
+	}
+	.legal h2 {
+		font-size: 1.15rem;
+		margin: 28px 0 8px;
+	}
+	.legal p {
+		margin: 0 0 16px;
+		text-wrap: pretty;
+	}
+	.legal a {
+		color: hsl(var(--theme-text));
+		text-decoration: underline;
+		text-decoration-color: hsl(var(--theme-text) / 0.35);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 3px;
+		transition: color 0.2s ease, text-decoration-color 0.2s ease;
+	}
+	.legal a:hover {
+		color: hsl(var(--theme-accent));
+		text-decoration-color: hsl(var(--theme-accent));
+	}
+</style>
