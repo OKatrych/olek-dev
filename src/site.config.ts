@@ -88,6 +88,6 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 		}
 		return `[data-theme="${theme.name}"]`;
 	},
-	themes: ["min-dark", "min-light"],
+	themes: ["one-dark-pro", "min-light"],
 	useThemedScrollbars: false,
 };
