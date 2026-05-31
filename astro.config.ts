@@ -56,6 +56,7 @@ export default defineConfig({
 			filter: (page) =>
 				![
 					"kordon-support",
+					"kordonlive-privacy-policy",
 					"p2p-binance-widget-privacy-policy",
 					"p2p-view-privacy-policy",
 					"p2p-widget-terms-and-conditions",
