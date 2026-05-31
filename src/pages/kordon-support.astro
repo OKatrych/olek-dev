@@ -1,0 +1,83 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "Get support for the Kordon app via Telegram or email.",
+	title: "Kordon — Support",
+};
+
+const telegram = "https://t.me/kordonapp?ref=olek.dev";
+const email = "me@olek.dev";
+---
+
+<PageLayout meta={meta}>
+	<section class="support" aria-labelledby="support-label">
+		<div class="section-label" id="support-label">Support</div>
+
+		<h1>Kordon — Support</h1>
+		<p>
+			Need help with the app? You can reach support through our Telegram group, or by emailing
+			directly. We are happy to answer your questions in English or Ukrainian.
+		</p>
+		<ul>
+			<li>Telegram: <a href={telegram} target="_blank" rel="noopener noreferrer">@kordonapp</a></li>
+			<li>Email: <a href={`mailto:${email}`}>{email}</a></li>
+		</ul>
+
+		<hr />
+
+		<h2 lang="uk">Kordon — Підтримка</h2>
+		<p lang="uk">
+			Потрібна допомога з застосунком? Ви можете звернутися до підтримки через нашу групу в Telegram
+			або написавши на електронну пошту. Ми радо відповімо на ваші запитання українською або
+			англійською мовою.
+		</p>
+		<ul lang="uk">
+			<li>Telegram: <a href={telegram} target="_blank" rel="noopener noreferrer">@kordonapp</a></li>
+			<li>Пошта: <a href={`mailto:${email}`}>{email}</a></li>
+		</ul>
+	</section>
+</PageLayout>
+
+<style>
+	.support {
+		margin-bottom: 64px;
+		max-width: var(--reading-width);
+	}
+	.support h1 {
+		font-size: 1.6rem;
+		margin: 0 0 8px;
+	}
+	.support h2 {
+		font-size: 1.3rem;
+		margin: 28px 0 8px;
+	}
+	.support p {
+		margin: 0 0 16px;
+		text-wrap: pretty;
+	}
+	.support ul {
+		margin: 0 0 16px;
+		padding-left: 1.2em;
+	}
+	.support li {
+		margin: 0 0 8px;
+	}
+	.support hr {
+		border: none;
+		border-top: 1px solid hsl(var(--theme-text) / 0.15);
+		margin: 40px 0;
+	}
+	.support a {
+		color: hsl(var(--theme-text));
+		text-decoration: underline;
+		text-decoration-color: hsl(var(--theme-text) / 0.35);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 3px;
+		transition: color 0.2s ease, text-decoration-color 0.2s ease;
+	}
+	.support a:hover {
+		color: hsl(var(--theme-accent));
+		text-decoration-color: hsl(var(--theme-accent));
+	}
+</style>

@@ -51,6 +51,15 @@ export default defineConfig({
 			changefreq: "weekly",
 			priority: 0.7,
 			lastmod: new Date(),
+			// App-only pages (support + store legal pages) are reachable by direct
+			// URL but kept out of the sitemap so they don't surface in search.
+			filter: (page) =>
+				![
+					"kordon-support",
+					"p2p-binance-widget-privacy-policy",
+					"p2p-view-privacy-policy",
+					"p2p-widget-terms-and-conditions",
+				].some((slug) => page.replace(/\/$/, "").endsWith(`/${slug}`)),
 		}),
 		mdx(),
 		robotsTxt(),
